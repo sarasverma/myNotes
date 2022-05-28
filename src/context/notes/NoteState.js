@@ -8,6 +8,7 @@ const NoteState = (props) => {
 
   const [notes, setNotes] = useState(notesArray);
 
+  // Fetch notes
   const fetchNotes = async () => {
     // API CALL
     const url = `${host}/api/notes/fetchnotes`;
@@ -22,6 +23,7 @@ const NoteState = (props) => {
     setNotes(await response.json());
   };
 
+  // Add note
   const addNote = async (title, description, tags) => {
     // API calls
     const url = `${host}/api/notes/createnote`;
@@ -39,6 +41,7 @@ const NoteState = (props) => {
     // console.log("after adding new notes ", notes);
   };
 
+  // Delete note
   const deleteNote = async (id) => {
     // API CALL
     const url = `${host}/api/notes/deletenote/${id}`;
@@ -56,7 +59,11 @@ const NoteState = (props) => {
     setNotes(newNotes);
   };
 
-  const updateNote = (id, title, description, tags) => {};
+  // Update note
+  const updateNote = (id, title, description, tags) => {
+    // API CALL
+    console.log("Update note called");
+  };
 
   // all component inside the NoteState will be able to use state
   return (

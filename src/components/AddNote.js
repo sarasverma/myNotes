@@ -50,6 +50,18 @@ function AddNote() {
             onChange={onChange}
           />
         </div>
+        <div className="mb-3">
+          <label htmlFor="tags" className="form-label">
+            Tags
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="tags"
+            name="tags"
+            onChange={onChange}
+          />
+        </div>
         <button
           type="submit"
           className="btn btn-primary"
