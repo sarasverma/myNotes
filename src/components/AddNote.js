@@ -10,7 +10,7 @@ function AddNote() {
 
   const context = useContext(notesContext);
 
-  const handleSubmit = (event) => {
+  const handleAddNote = (event) => {
     // make the page not reload
     event.preventDefault();
     context.addNote(note.title, note.description, note.tags);
@@ -53,9 +53,9 @@ function AddNote() {
         <button
           type="submit"
           className="btn btn-primary"
-          onClick={handleSubmit}
+          onClick={handleAddNote}
         >
-          Submit
+          Add note
         </button>
       </form>
     </>

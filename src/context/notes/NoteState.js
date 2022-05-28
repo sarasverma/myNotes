@@ -55,8 +55,14 @@ const NoteState = (props) => {
 
     setNotes(notesExample.concat(note));
   };
-  const deleteNote = () => {};
-  const updateNote = () => {};
+  const deleteNote = (id) => {
+    console.log("Deleted node with id " + id);
+    const newNotes = notesExample.filter((note) => {
+      return note._id !== id;
+    });
+    setNotes(newNotes);
+  };
+  const updateNote = (id, title, description, tags) => {};
 
   // all component inside the NoteState will be able to use state
   return (
