@@ -5,7 +5,7 @@ function AddNote() {
   const [note, setNote] = useState({
     title: "",
     description: "",
-    tags: "default",
+    tags: "",
   });
 
   const context = useContext(notesContext);
@@ -14,6 +14,11 @@ function AddNote() {
     // make the page not reload
     event.preventDefault();
     context.addNote(note.title, note.description, note.tags);
+    setNote({
+      title: "",
+      description: "",
+      tags: "",
+    });
   };
 
   const onChange = (event) => {
@@ -34,7 +39,7 @@ function AddNote() {
             className="form-control"
             id="title"
             name="title"
-            aria-describedby="emailHelp"
+            value={note.title}
             onChange={onChange}
           />
         </div>
@@ -47,6 +52,7 @@ function AddNote() {
             className="form-control"
             id="description"
             name="description"
+            value={note.description}
             onChange={onChange}
           />
         </div>
@@ -59,12 +65,17 @@ function AddNote() {
             className="form-control"
             id="tags"
             name="tags"
+            value={note.tags}
             onChange={onChange}
           />
         </div>
         <button
           type="submit"
-          className="btn btn-primary"
+          className={`btn btn-primary ${
+            note.description < 5 || note.title < 5 || note.tags < 3
+              ? "disabled"
+              : ""
+          }`}
           onClick={handleAddNote}
         >
           Add note

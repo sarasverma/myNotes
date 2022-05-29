@@ -15,15 +15,14 @@ function Notes(props) {
 
   // modal related stuff
   const [note, setNote] = useState({
-    title: "",
-    description: "",
-    tags: "default",
+    id: "",
+    etitle: "",
+    edescription: "",
+    etags: "",
   });
 
   const handleUpdate = (event) => {
-    // make the page not reload
-    event.preventDefault();
-    context.updateNote(note.etitle, note.edescription, note.etags);
+    context.updateNote(note.id, note.etitle, note.edescription, note.etags);
   };
 
   const onChange = (event) => {
@@ -35,6 +34,7 @@ function Notes(props) {
   const updateNote = (currentNote) => {
     ref.current.click();
     setNote({
+      id: currentNote._id,
       etitle: currentNote.title,
       edescription: currentNote.description,
       etags: currentNote.tags,
@@ -85,7 +85,8 @@ function Notes(props) {
                     className="form-control"
                     id="etitle"
                     name="etitle"
-                    aria-describedby="emailHelp"
+                    minLength={5}
+                    value={note.etitle}
                     onChange={onChange}
                   />
                 </div>
@@ -98,6 +99,8 @@ function Notes(props) {
                     className="form-control"
                     id="edescription"
                     name="edescription"
+                    minLength={5}
+                    value={note.edescription}
                     onChange={onChange}
                   />
                 </div>
@@ -110,6 +113,8 @@ function Notes(props) {
                     className="form-control"
                     id="etags"
                     name="etags"
+                    minLength={3}
+                    value={note.etags}
                     onChange={onChange}
                   />
                 </div>
@@ -125,7 +130,11 @@ function Notes(props) {
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+                className={`btn btn-primary ${
+                  note.edescription < 5 || note.etitle < 5 || note.etags < 3
+                    ? "disabled"
+                    : ""
+                }`}
                 onClick={handleUpdate}
               >
                 Save note
@@ -134,8 +143,10 @@ function Notes(props) {
           </div>
         </div>
       </div>
+
       <h2 className="my-3">Your notes</h2>
       <div className="container">
+        {notes.length === 0 && "No notes to display .."}
         {/* // .map return a new array actually */}
         <div className="row">
           {notes.map((note) => {

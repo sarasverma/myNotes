@@ -60,9 +60,30 @@ const NoteState = (props) => {
   };
 
   // Update note
-  const updateNote = (id, title, description, tags) => {
+  const updateNote = async (id, title, description, tags) => {
     // API CALL
-    console.log("Update note called");
+    const url = `${host}/api/notes/updatenote/${id}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI0NjczMGYxMjRiNWQwMDM3OGZiY2U0In0sImlhdCI6MTY0ODg3MjM3OH0.X6YY9X8s7Et4pXp3Jt1Au5UwvjXTVQ6XG7BqWDcP7t0",
+      },
+      body: JSON.stringify({ title, description, tags }),
+    });
+
+    // for updating front end
+    let newNotes = JSON.parse(JSON.stringify(notes)); // create deep Copy of notesArray
+    for (let index = 0; index < newNotes.length; index++) {
+      const element = newNotes[index];
+      if (element._id === id) {
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tags = tags;
+      }
+    }
+    setNotes(newNotes);
   };
 
   // all component inside the NoteState will be able to use state

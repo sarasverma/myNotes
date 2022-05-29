@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from "./Alert";
 import Notes from "./Notes";
 
 function Home() {
