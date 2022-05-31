@@ -58,6 +58,14 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+          <div className="d-flex">
+            <Link to="/login" className="btn btn-success mx-1">
+              Login
+            </Link>
+            <Link to="/signup" className="btn btn-success mx-1">
+              Sign up
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
