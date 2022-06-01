@@ -23,14 +23,22 @@ function App() {
     <>
       <NoteState>
         <BrowserRouter>
-          <Navbar />
+          <Navbar showAlert={showAlert} />
           <Alert alert={alert} />
           <Routes>
             <Route exact path="/" element={<Home showAlert={showAlert} />} />
             <Route exact path="/about" element={<About />} />
             <Route exact path="/contact" element={<Contact />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<SignUp />} />
+            <Route
+              exact
+              path="/login"
+              element={<Login showAlert={showAlert} />}
+            />
+            <Route
+              exact
+              path="/signup"
+              element={<SignUp showAlert={showAlert} />}
+            />
           </Routes>
         </BrowserRouter>
       </NoteState>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useHis6ory } from "react-router-dom"; has been updated in react router 5
 
-function Login() {
+function Login(props) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
@@ -33,47 +33,50 @@ function Login() {
       navigate("/");
       //   history.push("/");
     } else {
-      alert(json.error);
+      props.showAlert(json.error, "danger");
     }
   };
 
   return (
-    <form className="container" onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
-          Email address
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          name="email"
-          id="email"
-          aria-describedby="emailHelp"
-          minLength={5}
-          required
-          value={credentials.email}
-          onChange={onChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="exampleInputPassword1" className="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          name="password"
-          id="password"
-          minLength={5}
-          required
-          value={credentials.password}
-          onChange={onChange}
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    <div className="container">
+      <h2>Login to myNotes - To access your notes from anywhere.</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">
+            Email address
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            name="email"
+            id="email"
+            aria-describedby="emailHelp"
+            minLength={5}
+            required
+            value={credentials.email}
+            onChange={onChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="exampleInputPassword1" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            name="password"
+            id="password"
+            minLength={5}
+            required
+            value={credentials.password}
+            onChange={onChange}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import notesContext from "../context/notes/noteContext";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
@@ -6,11 +7,16 @@ import NoteItem from "./NoteItem";
 function Notes(props) {
   const context = useContext(notesContext);
   const { notes } = context;
+  let navigate = useNavigate();
 
   useEffect(() => {
     // will only run once (componentDidMount)
-    context.fetchNotes();
-    // eslint-disable-next-line
+    if (localStorage.getItem("token")) {
+      context.fetchNotes();
+      // eslint-disable-next-line
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   // modal related stuff
