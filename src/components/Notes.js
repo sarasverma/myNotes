@@ -23,6 +23,7 @@ function Notes(props) {
 
   const handleUpdate = (event) => {
     context.updateNote(note.id, note.etitle, note.edescription, note.etags);
+    props.showAlert("Updated successfully !", "success");
   };
 
   const onChange = (event) => {
@@ -43,7 +44,7 @@ function Notes(props) {
 
   return (
     <div className="container">
-      <AddNote />
+      <AddNote showAlert={props.showAlert} />
       <button
         ref={ref}
         style={{ display: "none" }}
@@ -151,7 +152,12 @@ function Notes(props) {
         <div className="row">
           {notes.map((note) => {
             return (
-              <NoteItem updateNote={updateNote} key={note._id} note={note} />
+              <NoteItem
+                updateNote={updateNote}
+                showAlert={props.showAlert}
+                key={note._id}
+                note={note}
+              />
             );
           })}
         </div>
